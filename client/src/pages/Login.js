@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate, Link } from "react-router-dom";
-import splash from "../assets/splash.webp"; // ✅ Use same image
+import splash from "../assets/splash.webp"; // ✅ your image
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -46,11 +46,9 @@ function Login() {
           Don't have an account? <Link to="/signup">Sign up</Link>
         </p>
       </div>
+
       <div className="auth-right">
-        <img
-          src={splash}
-          alt="splash"
-        />
+        <img src={splash} alt="Splash" />
       </div>
     </div>
   );
