@@ -34,17 +34,6 @@ Express
 
 MongoDB + Mongoose
 
-🧑‍💻 How to Use Locally
-1. Clone the repo
-bash
-Copy
-Edit
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-cd your-project-folder
-2. Install dependencies
-bash
-Copy
-Edit
 # For client
 cd client
 npm install
