@@ -1,7 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import notesRouter from './routes/notes.js'; // <-- Use ./routes/notes.js
+import path from 'path';
+import { fileURLToPath } from 'url';
+import notesRouter from './routes/notes.js';
 
 const app = express();
 app.use(cors());
@@ -14,13 +16,22 @@ mongoose.connect('mongodb://127.0.0.1:27017/newNotes', {
 .then(() => console.log('✅ MongoDB connected to newNotes'))
 .catch(err => console.error('MongoDB connection error:', err));
 
+// __dirname workaround for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.get('/', (_req, res) => {
-  res.send('Notes API is running');
-});
-
+// Serve API routes
 app.use('/api/notes', notesRouter);
 
-app.listen(5000, () => {
-  console.log('Server running on http://localhost:5000');
+// Serve React build folder
+app.use(express.static(path.join(__dirname, '../../client/build')));
+
+app.get('*', (_req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/build/index.html'));
+});
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
